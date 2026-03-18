@@ -8,15 +8,15 @@ import mdtraj
 
 def flags2variables():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-t', '--trajectory',action="store_true", help='Required. The path to the trajectory file (xtc or trr)')
-    parser.add_argument('-p','--topology',action="store_true",help='Required. The path to the topology file (.gro, .pdb)')
-    parser.add_argument('-c', '--color',action="store_true", help="Optional. Hex code of the desired color #XXXXXX")
-    parser.add_argument('-o','--out', action='store_true', help="Required. Path for output cluster files")
+    parser.add_argument('-t', '--trajectory',type=str, help='Required. The path to the trajectory file (xtc or trr)')
+    parser.add_argument('-p','--topology',type=str,help='Required. The path to the topology file (.gro, .pdb)')
+    parser.add_argument('-c', '--color',type=str, help="Optional. Hex code of the desired color #XXXXXX")
+    parser.add_argument('-o','--out', type=str, help="Required. Path for output cluster files")
     args = parser.parse_args()
-    top= mdtraj.load(args.topology()).topology
-    xtc=args.trajectory()
-    traj=mdtraj.load(xtc, top, stride=100)
-    out=''
+    top= mdtraj.load(args.topology).topology
+    xtc=args.trajectory
+    traj=mdtraj.load(xtc, top=top, stride=100)
+    out=args.out
 #generates a dictionary based on the residues in the topology file to map residues based on their position in the system
 def get_index2seq_dic(top):
     dic = {}
