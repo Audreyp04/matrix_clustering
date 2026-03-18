@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from tqdm import trange
 from time import sleep
+import argparse
 
 #generates a dictionary based on the residues in the topology file to map residues based on their position in the system
 def get_index2seq_dic(top):
@@ -98,3 +99,10 @@ def weight_pair_data(pairs, top, cutoff=0.6, start=0, stop=-1, progress=True):
         else:
             weights.append(len(data)/np.mean(data))
     return np.array(weights)
+
+def flags():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-t', '--trajectory',action="store_true", help='Required. The path to the trajectory file (xtc or trr)')
+    parser.add_argument('-p','--topology',action="store_true",help='Required. The path to the topology file (.gro, .pdb)')
+    parser.add_argument('-c', '--color',action="store_true", help="Optional. Hex code of the desired color #XXXXXX")
+    args = parser.parse_args()
