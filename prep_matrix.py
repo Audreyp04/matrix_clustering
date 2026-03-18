@@ -11,7 +11,7 @@ def flags2variables():
     parser.add_argument('-t', '--trajectory',action="store_true", help='Required. The path to the trajectory file (xtc or trr)')
     parser.add_argument('-p','--topology',action="store_true",help='Required. The path to the topology file (.gro, .pdb)')
     parser.add_argument('-c', '--color',action="store_true", help="Optional. Hex code of the desired color #XXXXXX")
-    parser.add_argument('-o','--out', action='store_true'), help='Required. Path for output cluster files'
+    parser.add_argument('-o','--out', action='store_true', help="Required. Path for output cluster files")
     args = parser.parse_args()
     top= mdtraj.load(args.topology()).topology
     xtc=args.trajectory()
